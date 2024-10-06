@@ -14,6 +14,18 @@ pipeline {
       }
     }
 
+     stage('Static Code Analysis') {
+      environment {
+        SONAR_URL = "http://http://3.109.182.28:9000/"
+      }
+      steps {
+        withCredentials([string(credentialsId: 'sonarqube', variable: '8209b51bef22f20668002d42dd9e5eb2c75e01e4')]) {
+          sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+        }
+      }
+    }
+
+
   
 
    }
